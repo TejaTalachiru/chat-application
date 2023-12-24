@@ -1,0 +1,42 @@
+<mat-toolbar color="primary">
+  <span>GetStream Chat</span>
+  <span class="header-spacer"></span>
+  <ng-container *ngIf="auth.isLoggedIn else authButtons">
+    <span>User {{ auth.userId }} is logged in</span>
+    <button mat-button (click)="signOut()">Sign Out</button>
+  </ng-container>
+</mat-toolbar>
+
+<main class="content mat-app-background">
+  <div style="float:right" *ngIf="auth.isLoggedIn">
+    <button (click)="toDark()" style="background-color:black;border-bottom-left-radius: 10px;border-top-left-radius: 10px;color:white;">Dark</button>
+    <button (click)="toLight()" style="background-color:white;border-bottom-right-radius: 10px;border-top-right-radius: 10px;color:black;">Light</button>
+  </div>
+  <router-outlet></router-outlet>
+</main>
+
+<ng-template #authButtons>
+  <a routerLink="/signin" routerLinkActive="active" mat-button>Signin</a>
+  <a routerLink="/signup" routerLinkActive="active" mat-button>Signup</a>
+</ng-template>
+<!--mat-toolbar color="primary">
+  <span>GetStream Chat</span>
+  <span class="header-spacer"></span>
+  <ng-container *ngIf="auth.isLoggedIn$ | async as user; else authButtons">
+    <span>User {{ user?.displayName }} is logged in</span>
+    <button mat-button (click)="signOut()">Sign Out</button>
+  </ng-container>
+  <ng-container *ngIf=" auth.isLoggedIn ; else authButtons">
+    <span>User {{ auth.userId }} is logged in</span>
+    <button mat-button (click)="signOut()">Sign Out</button>
+  </ng-container>
+</mat-toolbar>
+
+<main class="content mat-app-background">
+  <router-outlet></router-outlet>
+</main>
+
+<ng-template #authButtons>
+  <a routerLink="/signin" routerLinkActive="active" mat-button>Signin</a>
+  <a routerLink="/signup" routerLinkActive="active" mat-button>Signup</a>
+</ng-template!-->

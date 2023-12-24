@@ -1,0 +1,6 @@
+<span class="side">Members of Channel<button class="icon">{{channelName[0]}}</button>{{channelName}}</span><br>
+<span class="members">
+    <span *ngFor="let x of members" style="margin-top:5px">
+        <button class="icon">{{x[0]|uppercase}}</button>{{x}}<br><br>
+    </span>
+</span>

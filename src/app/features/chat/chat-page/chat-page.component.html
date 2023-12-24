@@ -1,0 +1,83 @@
+<!--app-new-channel (saved)="onCreate($event)"></app-new-channel!-->
+
+<!--section class="chat" *ngIf="chatIsReady$ | async; else unavailable">
+<section >
+    <stream-channel-list></stream-channel-list>
+    <stream-channel>
+        <stream-channel-header></stream-channel-header>
+        <stream-message-list></stream-message-list>
+        <stream-notification-list></stream-notification-list>
+        <stream-message-input></stream-message-input>
+        <stream-thread name="thread">
+            <stream-message-list
+              mode="thread"
+            ></stream-message-list>
+            <stream-message-input
+              mode="thread"
+            ></stream-message-input>
+          </stream-thread>
+    </stream-channel>
+</section>
+
+<ng-template #unavailable>
+    <div class="chat-notification">Chat is not available...</div>
+</ng-template>
+
+<ng-template #channelPreview let-channel="channel">
+    <section (click)="activateChannel(channel)">
+        <h1>{{channel.data?.name}}</h1>
+        <div>{{channel?.state?.messages.at(-1)?.text}}</div>
+    </section>
+</ng-template>
+
+<ng-template #channelActionsTemplate let-channel="channel">
+    <app-invite-button [channel]="channel"></app-invite-button>
+</ng-template>
+
+<ng-template #notificationTemplate let-type="type" let-content="content">
+    <div class="str-chat__custom-notification">
+      {{ type | uppercase }}
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </div>
+  </ng-template!-->
+  <app-new-channel (saved)="onCreate($event)"></app-new-channel>
+
+<section class="chat" *ngIf="isLoggedIn else unavailable">
+    <stream-channel-list></stream-channel-list>
+    <stream-channel>
+        <stream-channel-header class="background" (click)="showUsers()"></stream-channel-header>
+        <stream-notification-list></stream-notification-list>
+        <div *ngIf="show;else elseBlock">
+            <app-channel-members></app-channel-members>
+        </div>
+        <ng-template #elseBlock>
+            <stream-message-list></stream-message-list>
+            <stream-message-input>
+                <ng-template #emojiPickerTemplate let-emojiInput$="emojiInput$">
+                    <app-emoji-picker [emojiInput$]="emojiInput$"></app-emoji-picker>
+                  </ng-template>
+            </stream-message-input>
+            <!--<stream-thread name="thread">
+                <stream-message-list mode="thread"></stream-message-list>
+                <stream-message-input mode="thread"></stream-message-input>
+            </stream-thread>-->
+        </ng-template>
+    </stream-channel>
+</section>
+
+<ng-template #unavailable>
+    <div class="chat-notification">Chat is not available...</div>
+</ng-template>
+
+<!-- <ng-template #channelPreview let-channel="channel">
+    <section (click)="activateChannel(channel)">
+        <h1>{{channel.data?.name}}</h1>
+        <div>{{channel?.state?.messages.at(-1)?.text}}</div>
+    </section>
+</ng-template>-->
+
+<ng-template #channelActionsTemplate let-channel="channel">
+    <app-invite-button [channel]="channel"></app-invite-button>
+</ng-template> 
+
+  
